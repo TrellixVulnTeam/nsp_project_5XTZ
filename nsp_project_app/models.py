@@ -38,14 +38,14 @@ class City(models.Model):
 
 
 
-class Institute(models.Model):
+'''class Institute(models.Model):
     #username=models.OneToOneField(User,on_delete=models.CASCADE,blank=True,null=True)
     InstituteAddress = models.TextField(max_length=500)
     InstitutePhoneNo = models.IntegerField(unique=True)
     State_Name = models.ForeignKey(State,on_delete=models.CASCADE)
     city_Name = models.ForeignKey(City,on_delete=models.CASCADE)
     CreatedDate = models.DateTimeField(auto_now_add=True)
-    UpdateDate= models.DateTimeField(auto_now_add=True)
+    UpdateDate= models.DateTimeField(auto_now_add=True)'''
 
 
 
@@ -84,6 +84,7 @@ class Content(models.Model):
 
 
 class post(models.Model):
+    Title=models.CharField(max_length=10,blank=True)
     User = models.ForeignKey(User_info,on_delete=models.CASCADE,null=True,blank=True)
     Post_Content = models.ForeignKey(Content,null=True,on_delete=models.CASCADE)
     CreatedDate = models.DateTimeField(auto_now_add=True)
@@ -106,7 +107,8 @@ class post(models.Model):
 
 
 class Like(models.Model):
-    User = models.ForeignKey(User_info,on_delete=models.CASCADE,blank=True,null=True,)
+
+    User = models.ForeignKey(User_info,on_delete=models.CASCADE,blank=True,null=True)
     Post=models.ForeignKey(post,on_delete=models.CASCADE)
     LikeCount = models.IntegerField(default=0)
 
@@ -125,13 +127,14 @@ class Comment(models.Model):
     Post = models.ForeignKey(post,on_delete=models.CASCADE)
     CreatedDate = models.DateTimeField(auto_now_add=True)
     UpdateDate= models.DateTimeField(auto_now_add=True)
+
 #    flag = models.ChoiceField(racist,abusive)
 
 
-
 class FriendRequest(models.Model):
-    ToUser = models.ForeignKey(User_info,related_name='friendrequests',on_delete=models.CASCADE)
-    FromUser = models.ForeignKey(User_info,related_name='Request_Sent',on_delete=models.CASCADE)
+
+    ToUser = models.ForeignKey(User_info,related_name='friendrequests',on_delete=models.CASCADE,null=True,blank=True)
+    FromUser = models.ForeignKey(User_info,related_name='Request_Sent',on_delete=models.CASCADE,null=True,blank=True)
     Status = models.BooleanField(default=0)
 
 
@@ -142,6 +145,16 @@ class Followers_User(models.Model):
 
 
 
-class Followig_User(models.Model):
-    User = models.OneToOneField(User_info,related_name='Followings',on_delete=models.CASCADE)
-    Following = models.ManyToManyField('self',blank=True)
+
+
+
+class Notification(models.Model):
+    user=models.ForeignKey(User_info,related_name='user',on_delete=models.CASCADE,null=True,blank=True)
+    Like=models.ForeignKey(Like,related_name='like',on_delete=models.CASCADE,null=True,blank=True)
+    UnLike=models.ForeignKey(UnLike,related_name='Unlike',on_delete=models.CASCADE,null=True,blank=True)
+    comment=models.ForeignKey(Comment,related_name='comment',on_delete=models.CASCADE,null=True,blank=True)
+    friend=models.ForeignKey(FriendRequest,related_name='comment',on_delete=models.CASCADE,null=True,blank=True)
+    total=models.CharField(max_length=10)
+    CreatedDate = models.DateTimeField(auto_now_add=True)
+    status=models.BooleanField(max_length=10,null=True,blank=True,default=0)
+    UpdateDate= models.DateTimeField(auto_now_add=True)

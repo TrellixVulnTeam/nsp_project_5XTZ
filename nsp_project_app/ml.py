@@ -1,5 +1,4 @@
 import pandas as pd
-import pandas as pd
 import numpy as np
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -15,7 +14,7 @@ from sklearn.metrics import pairwise_distances
 from collections import Counter
 
 global postId
-def add(image,data,user):
+def add(data,user):
 
     postId = []
     #print(ob,'--------------------------------------')
@@ -23,11 +22,11 @@ def add(image,data,user):
     df_user=pd.DataFrame(user)
 
 
-    print('--------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    #print('--------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     #df2=pd.DataFrame(image)
 
-    print(df_user,'-----------------------------first')
-    print(df)
+    #print(df_user,'-----------------------------first')
+    #print(df)
     #df_user=df_user.to_csv(r'C:\Users\Ankesh\Desktop\user.csv', index=False)
     #df=df.to_csv(r'C:\Users\Ankesh\Desktop\data.csv', index=False)
     #df_user1=df_user.to_csv('user.csv', index=False)
@@ -88,7 +87,6 @@ def add(image,data,user):
             # we will pass 1. doc_id, 2. title1, 3. title2, url, model
             get_result(indices[i], df['text'].loc[df_indices[0]], df['text'].loc[df_indices[i]], 'tfidf')
 
-            #print('Text:',df['text'].loc[df_indices[i]])
             us = df["username"].loc[df_indices[i]]
            # us2 = df["username"].loc[df_indices[i]]
             pos= df["post_title"].loc[df_indices[i]]
@@ -112,19 +110,6 @@ def add(image,data,user):
         rec =rec[rec.username != user_id]
         postId_u = rec['Id'].values
         return postId_u
-    x = tfidf_model(id_user ,20)
+    x = tfidf_model(id_user ,30)
     postId.append((x))
     return postId
-    #    postId.append(posted_u[:])
-
-
-        #postId= rec['Id'].to_list()
-        #return postId
-#    postId_u = tfidf_model(id_user,10)
-    #return tfidf_model(id_user,10)
-        #postId_u=tfidf_model(id_user, 10)
-
-
-
-#print("ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh____1_____Yeeeaaaaaaahhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
-#print(add())
