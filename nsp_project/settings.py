@@ -29,7 +29,7 @@ SECRET_KEY = 'tsa&&os-z9!2tn865a^2&e5@92w#nbz6=_4e4jjt2@fo_w9v58'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://e-meet-backend.herokuapp.com','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['e-meet-backend.herokuapp.com','127.0.0.1','localhost']
 
 
 # Application definition
